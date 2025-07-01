@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sequoia Quant Trading Center | Advanced Financial Strategies</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-dark: #0A1428;    /* deep navy */
+      --primary-color: #1D2A48;   /* professional blue */
+      --accent-color: #C41E3A;    /* vibrant sequoia red */
+      --accent-light: #E74C3C;    /* lighter red for highlights */
+      --light-bg: #F5F7FA;
+      --card-bg: #FFFFFF;
+      --text-dark: #2D3748;
+      --text-light: #718096;
+      --success: #27AE60;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    header {
+      background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
+      color: white;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-icon {
+      background: var(--accent-color);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+    
+    .logo-text h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+    
+    .logo-text span {
+      font-size: 0.9rem;
+      font-weight: 400;
+      opacity: 0.8;
+      letter-spacing: 1px;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+    
+    nav a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      transition: all 0.3s ease;
+      padding: 8px 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    nav a:hover {
+      color: white;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-light);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    .hero {
+      background: linear-gradient(rgba(10, 20, 40, 0.85), rgba(10, 20, 40, 0.9)), 
+                  url('https://images.unsplash.com/photo-1468254095679-bbcba94a7066?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      position: relative;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      opacity: 0.9;
+    }
+    
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent-color);
+      color: white;
+      padding: 16px 40px;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+    }
+    
+    .cta-button:hover {
+      background: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(196, 30, 58, 0.4);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .section-title h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent-color);
+      border-radius: 2px;
+    }
+    
+    .section-title p {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 20px auto 0;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    .service-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+    
+    .card-icon {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: white;
+      font-size: 2.5rem;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .card-content {
+      padding: 30px;
+      flex-grow: 1;
+    }
+    
+    .card-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--primary-dark);
+    }
+    
+    .card-content p {
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+    
+    .stats-section {
+      background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
+      color: white;
+      padding: 80px 0;
+      margin: 60px 0;
+    }
+    
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .stat-value {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--accent-light);
+    }
+    
+    .stat-label {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    .payment-section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+    
+    .payment-content {
+      flex: 1;
+      min-width: 300px;
+      padding: 50px;
+    }
+    
+    .payment-content h3 {
+      font-size: 2rem;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+    }
+    
+    .payment-content p {
+      color: var(--text-light);
+      margin-bottom: 30px;
+      line-height: 1.8;
+    }
+    
+    .payment-methods {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .payment-method {
+      background: var(--light-bg);
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .pay-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent-color);
+      color: white;
+      padding: 16px 40px;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+    }
+    
+    .pay-button:hover {
+      background: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(196, 30, 58, 0.4);
+    }
+    
+    .payment-image {
+      flex: 1;
+      min-width: 300px;
+      background: url('https://images.unsplash.com/photo-1604594849809-dfedbc827105?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+    }
+    
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+    
+    .contact-info {
+      background: var(--primary-color);
+      color: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 0 auto;
+      grid-column: 1 / -1;
+      text-align: center;
+    }
+    
+    .contact-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .contact-info h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--accent-light);
+    }
+    
+    .contact-detail {
+      display: inline-block;
+      margin: 0 20px 25px;
+      text-align: center;
+      vertical-align: top;
+    }
+    
+    .contact-icon {
+      background: var(--accent-color);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 15px;
+    }
+    
+    .contact-text h4 {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    .contact-text p {
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      justify-content: center;
+    }
+    
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1.4rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      background: var(--accent-light);
+      transform: translateY(-3px);
+    }
+    
+    footer {
+      background: var(--primary-dark);
+      color: white;
+      padding: 60px 0 30px;
+    }
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      padding: 0 20px;
+    }
+    
+    .footer-column h4 {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--accent-light);
+    }
+    
+    .footer-column p {
+      opacity: 0.8;
+      margin-bottom: 25px;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+      font-size: 0.95rem;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate {
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    .delay-1 {
+      animation-delay: 0.2s;
+    }
+    
+    .delay-2 {
+      animation-delay: 0.4s;
+    }
+    
+    .delay-3 {
+      animation-delay: 0.6s;
+    }
+    
+    @media (max-width: 900px) {
+      .header-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+      
+      .contact-detail {
+        display: block;
+        margin: 0 auto 25px;
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .hero {
+        padding: 70px 20px;
+      }
+      
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .payment-section {
+        flex-direction: column;
+      }
+      
+      .payment-image {
+        height: 300px;
+      }
+      
+      .contact-info {
+        padding: 30px 20px;
+      }
+      
+      .contact-detail {
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-tree"></i>
+        </div>
+        <div class="logo-text">
+          <h1>SEQUOIA QUANT</h1>
+          <span>TRADING CENTER</span>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#services"><i class="fas fa-briefcase"></i> Services</a></li>
+          <li><a href="#performance"><i class="fas fa-chart-line"></i> Performance</a></li>
+          <li><a href="#payments"><i class="fas fa-credit-card"></i> Payments</a></li>
+          <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Advanced Quantitative Trading Strategies</h2>
+      <p>Leveraging cutting-edge algorithms and data science to navigate US markets with precision and confidence. Institutional-grade solutions for sophisticated investors.</p>
+      <a href="#contact" class="cta-button">Schedule a Consultation <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="section-title" id="services">
+      <h2>Our Services</h2>
+      <p>Specialized solutions for US market participants seeking data-driven investment strategies</p>
+    </div>
+    
+    <div class="services-grid">
+      <div class="service-card animate">
+        <div class="card-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="card-content">
+          <h3>Algorithmic Trading</h3>
+          <p>Proprietary algorithms designed to capitalize on short-term market inefficiencies across US equities, ETFs, and futures markets.</p>
+          <ul>
+            <li>High-frequency strategies</li>
+            <li>Statistical arbitrage</li>
+            <li>Market-making algorithms</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="service-card animate delay-1">
+        <div class="card-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="card-content">
+          <h3>Risk Management</h3>
+          <p>Sophisticated risk control frameworks to protect capital while maximizing returns in volatile market conditions.</p>
+          <ul>
+            <li>Portfolio stress testing</li>
+            <li>Real-time exposure monitoring</li>
+            <li>Tail-risk hedging strategies</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="service-card animate delay-2">
+        <div class="card-icon">
+          <i class="fas fa-brain"></i>
+        </div>
+        <div class="card-content">
+          <h3>Machine Learning Models</h3>
+          <p>Advanced predictive models using AI and alternative data sources to identify market opportunities before they materialize.</p>
+          <ul>
+            <li>Sentiment analysis</li>
+            <li>Pattern recognition</li>
+            <li>Predictive analytics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="stats-section" id="performance">
+      <div class="stats-container">
+        <div class="stat-item animate">
+          <div class="stat-value">12.8%</div>
+          <div class="stat-label">Avg. Annual Return (5Y)</div>
+        </div>
+        <div class="stat-item animate delay-1">
+          <div class="stat-value">0.82</div>
+          <div class="stat-label">Sharpe Ratio</div>
+        </div>
+        <div class="stat-item animate delay-2">
+          <div class="stat-value">$1.2B+</div>
+          <div class="stat-label">Assets Managed</div>
+        </div>
+        <div class="stat-item animate delay-3">
+          <div class="stat-value">200+</div>
+          <div class="stat-label">Institutional Clients</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section-title" id="payments">
+      <h2>Secure Payment Solutions</h2>
+      <p>Multiple payment options for your convenience with bank-level security</p>
+    </div>
+    
+    <div class="payment-section">
+      <div class="payment-content">
+        <h3>Premium Membership</h3>
+        <p>Access our institutional-grade trading algorithms, real-time market insights, and dedicated financial advisor support.</p>
+        
+        <div class="payment-methods">
+          <div class="payment-method">
+            <i class="fab fa-cc-visa"></i> Visa
+          </div>
+          <div class="payment-method">
+            <i class="fab fa-cc-mastercard"></i> Mastercard
+          </div>
+          <div class="payment-method">
+            <i class="fab fa-cc-amex"></i> Amex
+          </div>
+          <div class="payment-method">
+            <i class="fab fa-paypal"></i> PayPal
+          </div>
+        </div>
+        
+        <a href="https://www.paypal.com/paypalme/sequoiaquant" target="_blank" class="pay-button">
+          <i class="fas fa-lock"></i> Secure Payment Portal
+        </a>
+        
+        <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
+          <i class="fas fa-shield-alt"></i> All transactions are encrypted and secured with 256-bit SSL technology
+        </p>
+      </div>
+      
+      <div class="payment-image"></div>
+    </div>
+    
+    <div class="section-title" id="contact">
+      <h2>Contact Us</h2>
+      <p>Our team is ready to discuss how our quantitative strategies can enhance your portfolio</p>
+    </div>
+    
+    <div class="contact-container">
+      <div class="contact-info">
+        <h3>Get In Touch</h3>
+        
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-text">
+            <h4>Email</h4>
+            <p>inquiries@sequoiaquant.com</p>
+          </div>
+        </div>
+        
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <i class="fas fa-comments"></i>
+          </div>
+          <div class="contact-text">
+            <h4>Online Support</h4>
+            <p>24/7 Client Portal Access</p>
+          </div>
+        </div>
+        
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-telegram-plane"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>About Sequoia Quant</h4>
+        <p>Founded in 2022, Sequoia Quant Trading Center combines financial expertise with cutting-edge technology to deliver superior quantitative strategies to institutional and high-net-worth investors.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Regulatory Compliance</h4>
+        <p>Registered with the SEC as an investment advisor. Member FINRA and SIPC. All investments involve risk and past performance is not indicative of future results.</p>
+        <p style="margin-top: 20px; font-size: 0.95rem; opacity: 0.9;">
+          <i class="fas fa-shield-alt"></i> Secure & Encrypted Communication
+        </p>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      &copy; 2025 Sequoia Quant Trading Center. All rights reserved. SEC Registered Investment Advisor.
+    </div>
+  </footer>
+
+  <script>
+    // Simple animation observer
+    document.addEventListener('DOMContentLoaded', function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      document.querySelectorAll('.service-card, .stat-item').forEach(card => {
+        observer.observe(card);
+      });
+      
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
