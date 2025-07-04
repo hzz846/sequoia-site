@@ -343,25 +343,28 @@
       gap: 10px;
     }
     
-    .pay-button {
+    .buy-button {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: var(--accent-color);
-      color: white;
-      padding: 16px 40px;
+      background-color: #1a1a1a;  /* 黑色背景 */
+      color: white;               /* 白色文字 */
+      padding: 16px 40px;         /* 按钮上下和左右的内边距 */
+      border: none;
+      border-radius: 999px;       /* 圆角，pill 样式 */
+      text-align: center;
       text-decoration: none;
-      border-radius: 50px;
-      font-weight: 600;
       font-size: 1.1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
     
-    .pay-button:hover {
-      background: var(--accent-light);
+    .buy-button:hover {
+      background-color: #333;     /* 悬停时更亮一些 */
       transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(196, 30, 58, 0.4);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     }
     
     .payment-image {
@@ -710,8 +713,9 @@
           </div>
         </div>
         
-        <a href="https://www.paypal.com/paypalme/sequoiaquant" target="_blank" class="pay-button">
-          <i class="fas fa-lock"></i> Secure Payment Portal
+        <!-- 替换为新的BUY IT NOW按钮 -->
+        <a href="https://www.paypal.com/paypalme/sequoiaquant" target="_blank" class="buy-button">
+          <i class="fas fa-lock"></i> BUY IT NOW
         </a>
         
         <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
