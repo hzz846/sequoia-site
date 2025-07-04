@@ -264,6 +264,14 @@
       margin-bottom: 20px;
     }
     
+    .card-content ul {
+      padding-left: 20px;
+    }
+    
+    .card-content li {
+      margin-bottom: 8px;
+    }
+    
     .stats-section {
       background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
       color: white;
@@ -347,11 +355,11 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background-color: #1a1a1a;  /* 黑色背景 */
-      color: white;               /* 白色文字 */
-      padding: 16px 40px;         /* 按钮上下和左右的内边距 */
+      background-color: #1a1a1a;
+      color: white;
+      padding: 16px 40px;
       border: none;
-      border-radius: 999px;       /* 圆角，pill 样式 */
+      border-radius: 999px;
       text-align: center;
       text-decoration: none;
       font-size: 1.1rem;
@@ -362,7 +370,7 @@
     }
     
     .buy-button:hover {
-      background-color: #333;     /* 悬停时更亮一些 */
+      background-color: #333;
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     }
@@ -456,6 +464,7 @@
       color: white;
       font-size: 1.4rem;
       transition: all 0.3s ease;
+      text-decoration: none;
     }
     
     .social-link:hover {
@@ -580,21 +589,25 @@
       .contact-detail {
         margin-bottom: 30px;
       }
+      
+      .social-links {
+        flex-wrap: wrap;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="header-container">
-<div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="cursor: pointer;">
-  <div class="logo-icon">
-    <i class="fas fa-tree"></i>
-  </div>
-  <div class="logo-text">
-    <h1>SEQUOIA QUANT</h1>
-    <span>TRADING CENTER</span> 
-  </div>
-</div>
+      <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="cursor: pointer;">
+        <div class="logo-icon">
+          <i class="fas fa-tree"></i>
+        </div>
+        <div class="logo-text">
+          <h1>SEQUOIA QUANT</h1>
+          <span>TRADING CENTER</span> 
+        </div>
+      </div>
       <nav>
         <ul>
           <li><a href="#services"><i class="fas fa-briefcase"></i> Services</a></li>
@@ -713,7 +726,6 @@
           </div>
         </div>
         
-        <!-- 替换为新的BUY IT NOW按钮 -->
         <a href="https://test.sequoia-sites.top/" target="_blank" class="buy-button">
           <i class="fas fa-lock"></i> BUY IT NOW
         </a>
@@ -756,10 +768,10 @@
         </div>
         
         <div class="social-links">
-          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-telegram-plane"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+          <a class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a class="social-link"><i class="fab fa-twitter"></i></a>
+          <a class="social-link"><i class="fab fa-telegram-plane"></i></a>
+          <a class="social-link"><i class="fab fa-discord"></i></a>
         </div>
       </div>
     </div>
@@ -771,9 +783,9 @@
         <h4>About Sequoia Quant</h4>
         <p>Founded in 2022, Sequoia Quant Trading Center combines financial expertise with cutting-edge technology to deliver superior quantitative strategies to institutional and high-net-worth investors.</p>
         <div class="social-links">
-          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-telegram-plane"></i></a>
+          <a class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a class="social-link"><i class="fab fa-twitter"></i></a>
+          <a class="social-link"><i class="fab fa-telegram-plane"></i></a>
         </div>
       </div>
       
@@ -792,7 +804,6 @@
   </footer>
 
   <script>
-    // Simple animation observer
     document.addEventListener('DOMContentLoaded', function() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -804,17 +815,22 @@
         threshold: 0.1
       });
       
-      document.querySelectorAll('.service-card, .stat-item').forEach(card => {
-        observer.observe(card);
+      // Observe all animatable elements
+      document.querySelectorAll('.service-card, .stat-item, .section-title, .payment-section').forEach(element => {
+        observer.observe(element);
       });
       
       // Smooth scrolling for navigation links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
           e.preventDefault();
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-          });
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
         });
       });
     });
